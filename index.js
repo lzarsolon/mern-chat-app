@@ -1,20 +1,17 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-require("dotenv").config();
+dotenv.config();
+const app = express(); // Initialize express app
+const db = process.env.MONGODB_URI;
+const port = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
   res.send("MERN Chat App");
 });
 
-const db = process.env.MONGODB_URI;
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
+// Establish db connection
 mongoose
   .connect(db, {
     useNewUrlParser: true,
@@ -23,3 +20,8 @@ mongoose
   })
   .then(() => console.log("MongoDB connection established..."))
   .catch((error) => console.error("MongoDB connection failed:", error.message));
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

@@ -9,7 +9,7 @@ const { MONGO_URI } = config;
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("MERN Chat App");
+  res.send("Chat application");
 });
 
 // CORS Middleware
